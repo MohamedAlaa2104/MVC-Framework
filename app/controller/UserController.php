@@ -1,20 +1,15 @@
 <?php
 
-class User
+class User extends BaseController
 {
     public function __construct()
     {
-        echo 'hello from user class';
+        $this->view('user');        
     }
 
     public function index()
     {
-        
+        echo 'User / Index';
     }
 
-    public function create($param)
-    {
-        echo '<br>'. 'work good';
-        echo $param; 
-    }
 }

@@ -36,15 +36,6 @@ class Core
         return '../app/controller/' . ucwords($name) . 'Controller.php';
     }
 
-    public function checkControllerFileExists($name)
-    {
-        if(!file_exists( $this->controllerPath($name) ))
-            throw new Exception;
-        
-        $this->currentController = ucwords($name);
-        unset($this->currentUrl[0]);
-        
-    }
 
     public function requireController()
     {
@@ -53,8 +44,18 @@ class Core
             $this->checkControllerFileExists($this->currentUrl[0]);
             require_once $this->controllerPath($this->currentController);
         }catch(Exception $e){
-            $this->currentController = 'erorr';
+            die('Controller not exist');
         }
+    }
+
+    public function checkControllerFileExists($name)
+    {
+        if(!file_exists( $this->controllerPath($name) ))
+            throw new Exception;
+        
+        $this->currentController = ucwords($name);
+        unset($this->currentUrl[0]);
+        
     }
 
     public function instantiatController()
@@ -66,13 +67,12 @@ class Core
     {
         if(isset($this->currentUrl[1]))
         {
-            if(method_exists($this->currentController, $this->currentUrl[1]))
-            {
-                $this->currentMethod = $this->currentUrl[1];
-                unset($this->currentUrl[1]);
-            }
+            if(!method_exists($this->currentController, $this->currentUrl[1]))
+             die('Method not exist');
+            $this->currentMethod = $this->currentUrl[1];
+            unset($this->currentUrl[1]);
             $this->params = $this->currentUrl ? array_values($this->currentUrl) : [];
-            call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
         }
+        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 }

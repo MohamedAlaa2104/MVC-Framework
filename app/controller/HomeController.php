@@ -1,9 +1,9 @@
 <?php
 
-class Home
+class Home extends BaseController
 {
     public function index ()
     {
-        echo 'wor';
+        echo 'Home / Index';
     }
 }
