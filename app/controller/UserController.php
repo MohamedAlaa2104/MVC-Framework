@@ -2,14 +2,13 @@
 
 class User extends BaseController
 {
-    public function __construct()
-    {
-        $this->view('user');        
-    }
 
     public function index()
     {
-        echo 'User / Index';
+        $data = [
+            'text'=>'<h1>User View Text by passing data from controller to view</h1>',
+        ];
+        $this->view('user', $data);
     }
 
 }

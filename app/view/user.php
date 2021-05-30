@@ -1,1 +1,3 @@
-<h1>User view</h1>
+<?php
+
+echo $data['text'];
