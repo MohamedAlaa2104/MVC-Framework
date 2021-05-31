@@ -1,6 +1,11 @@
 <?php
 
-require_once 'library/core.php';
-require_once 'library/basecontroller.php';
 
-new Core();
+require_once 'config/config.php';
+
+
+spl_autoload_register(function($className){
+    require_once 'library/'. $className .'.php';
+
+});
+

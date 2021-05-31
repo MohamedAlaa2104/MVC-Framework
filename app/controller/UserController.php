@@ -1,6 +1,6 @@
 <?php
 
-class User extends BaseController
+class UserController extends BaseController
 {
 
     public function index()
@@ -8,7 +8,11 @@ class User extends BaseController
         $data = [
             'text'=>'<h1>User View Text by passing data from controller to view</h1>',
         ];
-        $this->view('user', $data);
+
+        $this->userModel = $this->model('User');
+
+
+        $this->view('user/index', $data);
     }
 
 }

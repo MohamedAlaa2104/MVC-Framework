@@ -60,7 +60,7 @@ class Core
 
     public function instantiatController()
     {
-        $this->currentController = new $this->currentController;
+        $this->currentController = new ($this->currentController . 'Controller');
     }
 
     public function getUrlParams()
